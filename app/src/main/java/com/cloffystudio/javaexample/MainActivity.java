@@ -1,6 +1,10 @@
 package com.cloffystudio.javaexample;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +15,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.cloffystudio.javaexample.ClassLesson.Kitap;
 import com.cloffystudio.javaexample.ClassLesson.Kutuphane;
 import com.cloffystudio.javaexample.ClassLesson.Uye;
+import com.cloffystudio.javaexample.Method.HesapMakinesi;
+import com.cloffystudio.javaexample.Method.Matematik;
+import com.cloffystudio.javaexample.Method.Ornek;
 import com.cloffystudio.javaexample.MuslukExample.Catlak;
 import com.cloffystudio.javaexample.MuslukExample.Havuz;
 import com.cloffystudio.javaexample.MuslukExample.Musluk;
@@ -27,6 +34,37 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+//        erişimBelirleyici dönüşTipi methodAdi(parametreler) {
+//            // Kodlar
+//            return değer; // Eğer dönüş tipi void değilse
+//        }
+
+        Ornek ornek = new Ornek();
+        ornek.selamVer();  // Çıktı: Merhaba! Java öğreniyoruz.
+
+        HesapMakinesi hesapMakinesi = new HesapMakinesi();
+        hesapMakinesi.toplamaYap(5, 10);  // Çıktı: Toplam: 15
+
+        int sonuc = HesapMakinesi.kareAl(4);
+        System.out.println("Sonuç: " + sonuc);  // Çıktı: Sonuç: 16
+
+        int sonuc2 = hesapMakinesi.carpmaYap(6, 7);
+        System.out.println("Sonuç: " + sonuc2);  // Çıktı: Sonuç: 42
+
+        Matematik matematik = new Matematik();
+        System.out.println("Tam sayı toplama: " + matematik.topla(5, 10));  // Çıktı: 15
+        System.out.println("Ondalık toplama: " + matematik.topla(5.5, 10.2));  // Çıktı: 15.7
+
+        TextView textView = findViewById(R.id.textView);
+        Button buttonSelam = findViewById(R.id.buttonSelam);
+        buttonSelam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView.setText("Merhaba!");
+            }
+        });
+
 
         Havuz havuz = new Havuz(1000);
 
@@ -45,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         // Havuzun dolum süresini hesaplama
         float dolumSuresi = havuz.dolumSuresiHesapla();
         System.out.printf("Havuzun dolum süresi: %.2f saniye\n", dolumSuresi);
+
 
 
         // Kütüphane oluşturma
@@ -76,5 +115,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Güncel durumu listeleme
         kutuphane.tumKitaplariListele();
+
     }
 }
